@@ -1,0 +1,166 @@
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+
+:root{
+  --bg: #f6f4ee;
+  --border: rgba(0,0,0,0.12);
+
+  /* speed = pixels per second (JS uses this) */
+  --speed: 70;
+
+  /* JS sets these */
+  --loop-distance: 1000px;
+  --duration: 20s;
+}
+
+body{
+  margin: 0;
+  background: var(--bg);
+  color: #111;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  letter-spacing: -0.01em;
+}
+
+/* top nav */
+.topbar{
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: 56px;
+  z-index: 10;
+}
+.topbar-inner{
+  height: 56px;
+  padding: 0 22px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.brand{
+  text-decoration: none;
+  color: inherit;
+  font-size: 14px;
+  font-weight: 500;
+}
+.nav a{
+  text-decoration: none;
+  color: inherit;
+  font-size: 14px;
+  margin-left: 18px;
+}
+.nav a:hover{ opacity: .75; }
+
+/* remove the big whitespace section completely */
+.stage{
+    display: none;
+  }
+  
+  /* center carousel in the viewport */
+  .carousel{
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+.viewport{
+  position: relative;
+}
+
+/* The animated strip */
+.track{
+  display: flex;
+  gap: 0px;
+  width: max-content;
+  will-change: transform;
+
+  animation: marquee var(--duration) linear infinite;
+}
+
+
+/* Cards */
+.card{
+  position: relative;
+  flex: 0 0 auto;
+  text-decoration: none;
+  color: inherit;
+}
+
+.card img{
+  aspect-ratio: 9 / 16;
+  width: clamp(180px, 18vw, 260px);
+  height: auto;
+  object-fit: cover;
+}
+/* Caption appears only on hover/focus */
+.caption{
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  bottom: -44px; /* sits under the image like the screenshot */
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 160ms ease, transform 160ms ease;
+  pointer-events: none;
+}
+
+.title{
+  font-size: 13px;
+  font-weight: 600;
+}
+.meta{
+  font-size: 12px;
+  opacity: .75;
+  margin-top: 2px;
+}
+
+.card:hover .caption,
+.card:focus-visible .caption{
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* fade edges (optional but matches the “strip” feel) */
+.fade{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 10px;
+  pointer-events: none;
+}
+.fade-left{
+  left: 0;
+  background: linear-gradient(
+    to right,
+    rgba(246,244,238,0.15),
+    rgba(246,244,238,0)
+  );
+}
+.fade-right{
+  right: 0;
+  background: linear-gradient(
+    to left,
+    rgba(246,244,238,0.15),
+    rgba(246,244,238,0)
+  );
+}
+
+/* CSS animation: move left by exactly one set width */
+@keyframes marquee{
+  from{ transform: translateX(0); }
+  to  { transform: translateX(calc(-1 * var(--loop-distance))); }
+}
+
+/* Responsive tweak */
+@media (max-width: 520px){
+  .stage{ min-height: 54vh; }
+  .card img{
+    width: 86vw;
+    height: 34vh;
+  }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .track{ animation: none; }
+}
