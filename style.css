@@ -247,8 +247,11 @@ body.project-page .topbar{
 }
 
 /* TEXT block (breathing room, slightly left-aligned like the recording) */
-.p-text{
-  padding: 0 18px 50px;
+.p-text {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  padding-bottom: 50px;
 }
 
 .p-text p{
