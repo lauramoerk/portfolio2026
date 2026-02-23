@@ -164,3 +164,141 @@ body{
 @media (prefers-reduced-motion: reduce){
   .track{ animation: none; }
 }
+
+/* Project page */
+
+/* make topbar feel like it overlays content a bit */
+body.project-page .topbar{
+  background: rgba(246,244,238,0.70);
+  backdrop-filter: blur(10px);
+}
+
+/* main wrapper */
+.p{
+  /* leave room for fixed topbar */
+  padding-top: 56px;
+}
+
+/* HERO: big whitespace + centered title */
+.p-hero{
+  min-height: 48vh;
+  display: grid;
+  place-items: center;
+  padding: 56px 18px 34px;
+}
+
+.p-hero__inner{
+  text-align: center;
+  max-width: 900px;
+}
+
+.p-title{
+  margin: 0;
+  font-size: clamp(44px, 7vw, 88px);
+  font-weight: 500;
+  letter-spacing: -0.04em;
+}
+
+.p-sub{
+  margin-top: 10px;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.75;
+}
+
+.p-year{
+  margin-top: 6px;
+  font-size: 13px;
+  opacity: 0.75;
+}
+
+/* MEDIA base */
+.p-media{
+  margin: 0;
+  padding: 0;
+}
+
+.p-media img,
+.p-media video{
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+/* FULL BLEED sections (edge-to-edge) */
+.p-media--bleed{
+  width: 100%;
+}
+
+/* CENTERED media sections (smaller, floating in whitespace) */
+.p-media--center{
+  display: grid;
+  place-items: center;
+  padding: clamp(28px, 6vw, 72px) 18px;
+}
+
+.p-media--center img,
+.p-media--center video{
+  width: min(720px, 72vw);
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.20);
+}
+
+/* TEXT block (breathing room, slightly left-aligned like the recording) */
+.p-text{
+  padding: 0 18px 50px;
+}
+
+.p-text p{
+  margin: 0;
+  max-width: 78ch;
+  font-size: 14px;
+  line-height: 1.7;
+  opacity: 0.85;
+}
+
+/* SPLIT full-bleed (two-up, no gap) */
+.p-split{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+}
+
+.p-split__col img,
+.p-split__col video{
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* keep split feeling “full” on tall screens */
+.p-split__col{
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+
+/* Mobile: stack split */
+@media (max-width: 820px){
+  .p-split{
+    grid-template-columns: 1fr;
+  }
+  .p-split__col{
+    aspect-ratio: 4 / 3;
+  }
+}
+
+/* Back link */
+.p-back{
+  padding: 44px 18px 80px;
+  text-align: center;
+}
+
+.p-back a{
+  text-decoration: none;
+  color: inherit;
+  font-size: 14px;
+}
+.p-back a:hover{ opacity: .75; }
