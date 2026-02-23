@@ -251,7 +251,7 @@ body.project-page .topbar{
   display: flex;
   justify-content: center;
   text-align: center;
-  padding-bottom: 50px;
+  padding-top: 50px;
 }
 
 .p-text p{
