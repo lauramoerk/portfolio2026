@@ -182,15 +182,17 @@ body.project-page .topbar{
 /* HERO: big whitespace + centered title */
 .p-hero{
   min-height: 48vh;
-  display: grid;
-  place-items: center;
+  display: flex;
+  justify-content: center;
   padding: 56px 18px 34px;
 }
 
-.p-hero__inner{
+.p-hero__inner {
   text-align: center;
   max-width: 900px;
-}
+  display: flex;
+  flex-direction: column;
+  align-items: center;}
 
 .p-title{
   margin: 0;
