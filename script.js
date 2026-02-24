@@ -73,3 +73,12 @@
     }, 200);
   });
 })();
+
+const el = document.getElementById('timelineScroller');
+el.addEventListener('wheel', (e) => {
+  if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+    el.scrollLeft += e.deltaY;
+    e.preventDefault();
+  }
+}, { passive: false });
+

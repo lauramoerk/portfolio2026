@@ -11,6 +11,10 @@ html, body { height: 100%; }
   /* JS sets these */
   --loop-distance: 1000px;
   --duration: 20s;
+
+    --dot-size: 14px;
+    --timeline-gap: clamp(28px, 6vw, 90px);
+  
 }
 
 body{
@@ -317,3 +321,139 @@ body.project-page .topbar{
   font-size: 14px;
 }
 .p-back a:hover{ opacity: .75; }
+
+
+.wrap{
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 56px 24px 0;
+}
+
+.title{
+  font-size: clamp(40px, 5vw, 72px);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  margin: 0;
+}
+
+/* timeline region */
+.timeline{
+  padding: clamp(40px, 8vw, 96px);
+  margin: clamp(48px, 8vw, 120px) auto;
+
+  max-width: 1200px;
+
+  border-radius: 0px;
+  border: 1px solid rgba(0,0,0,0.12);
+}
+
+.timeline__scroller{
+  overflow-x: auto;
+  overflow-y: visible;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding: 0 24px;
+
+    /* edge fade */
+    mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      black 60px,
+      black calc(100% - 60px),
+      transparent 100%
+    );
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      black 60px,
+      black calc(100% - 60px),
+      transparent 100%
+    );
+}
+
+.timeline__scroller::-webkit-scrollbar{ display: none; }
+
+/* track */
+.timeline__track{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  padding-inline:12px;
+
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(260px, 340px);
+
+  position: relative;
+  align-items: start;
+  grid-auto-columns: minmax(220px, 32vw);
+  column-gap: var(--timeline-gap);
+
+}
+
+
+/* Align dot + connector on the same Y */
+.step{
+  position: relative;
+  padding-top: 54px;
+}
+
+.dot{
+  width: var(--dot-size);
+  height: var(--dot-size);
+  border-radius: 999px;
+  background: #000;
+
+  position: absolute;
+  left: 0;
+  top: 28px;
+  transform: translateY(-50%);
+  z-index: 1;
+}
+
+/* Connector AFTER each dot (except the last step) */
+.step:not(:last-child)::after{
+  content: "";
+  position: absolute;
+
+  left: calc(var(--dot-size) / 2); /* start at dot center */
+  top: 28px;
+  transform: translateY(-50%);
+
+  height: 2px;
+  width: calc(100% + var(--timeline-gap)); /* reach next dot center */
+
+  background: rgba(0,0,0,0.4);
+  z-index: 0;
+  pointer-events: none;
+}
+
+
+/* text */
+.step__title{
+  margin: 0;
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.step__desc{
+  margin: 18px 0 0;
+  font-size: 16px;
+  line-height: 1.45;
+  color: rgba(0,0,0,0.75);
+  max-width: 32ch;
+}
+
+/* responsive tightening */
+@media (max-width: 640px){
+  .timeline{
+    --timeline-gap: 56px; /* keep everything in sync */
+  }
+  .timeline__track{
+    grid-auto-columns: minmax(220px, 280px);
+  }
+  .step__title{ font-size: 18px; }
+  .step__desc{ font-size: 14px; }
+}
