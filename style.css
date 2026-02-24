@@ -180,11 +180,12 @@ body.project-page .topbar{
 }
 
 /* HERO: big whitespace + centered title */
+
+
 .p-hero{
-  min-height: 48vh;
-  display: flex;
-  justify-content: center;
-  padding: 56px 18px 34px;
+  display: grid;
+  place-items: center;
+  padding: 56px 18px 24px;
 }
 
 .p-hero__inner {
@@ -196,7 +197,7 @@ body.project-page .topbar{
 
 .p-title{
   margin: 0;
-  font-size: clamp(44px, 7vw, 88px);
+  font-size: clamp(32px, 4.5vw, 56px);
   font-weight: 500;
   letter-spacing: -0.04em;
 }
@@ -215,23 +216,32 @@ body.project-page .topbar{
   opacity: 0.75;
 }
 
+
 /* MEDIA base */
 .p-media{
   margin: 0;
   padding: 0;
 }
 
-.p-media img,
-.p-media video{
-  display: block;
+
+
+.p-media--bleed img,
+.p-media--bleed video{
   width: 100%;
-  height: auto;
+  height: 100%;
   object-fit: cover;
 }
 
-/* FULL BLEED sections (edge-to-edge) */
 .p-media--bleed{
-  width: 100%;
+  overflow: hidden;
+}
+
+.p-media--short{
+  height: clamp(260px, 40vh, 480px);
+}
+
+.p-media--tall{
+  height: clamp(420px, 80vh, 900px);
 }
 
 /* CENTERED media sections (smaller, floating in whitespace) */
